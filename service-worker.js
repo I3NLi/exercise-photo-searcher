@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "/precache-manifest.d9acbb1f3e092436b703e24f4d74f507.js"
+  "/precache-manifest.589e4b8af38b0acecc7941ee4076de88.js"
 );
 
 workbox.core.setCacheNameDetails({prefix: "exercise-photo-searcher"});

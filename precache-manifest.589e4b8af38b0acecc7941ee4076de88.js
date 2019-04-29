@@ -32,8 +32,8 @@ self.__precacheManifest = [
     "url": "/img/mock_qua.c72ad128.jpg"
   },
   {
-    "revision": "62d718c05c384df971b9",
-    "url": "/js/app.453cedfe.js"
+    "revision": "ed03a2702d63a4432c7b",
+    "url": "/js/app.44b33bf0.js"
   },
   {
     "revision": "33540b99e788e329f69d",
@@ -48,12 +48,12 @@ self.__precacheManifest = [
     "url": "/img/ionicons.a2c4a261.svg"
   },
   {
-    "revision": "955e1da364ade4f73399094b153c54bf",
+    "revision": "816340ffc8d56ad29848dc7854df4d4a",
     "url": "/index.html"
   },
   {
-    "revision": "62d718c05c384df971b9",
-    "url": "/css/app.e2ff8ed3.css"
+    "revision": "ed03a2702d63a4432c7b",
+    "url": "/css/app.04f3481f.css"
   },
   {
     "revision": "9e87eb9c027873e9f96876c7b2f5a973",
