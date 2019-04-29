@@ -8,8 +8,8 @@ self.__precacheManifest = [
     "url": "/robots.txt"
   },
   {
-    "revision": "99ac3308dd8ee14f749f51538d0d5b9e",
-    "url": "/fonts/ionicons.99ac3308.woff"
+    "revision": "d535a25a79fb1365ae814b61e88fae71",
+    "url": "/fonts/ionicons.d535a25a.ttf"
   },
   {
     "revision": "267eb3841286dc7803d9",
@@ -40,15 +40,15 @@ self.__precacheManifest = [
     "url": "/js/chunk-vendors.66176722.js"
   },
   {
-    "revision": "d535a25a79fb1365ae814b61e88fae71",
-    "url": "/fonts/ionicons.d535a25a.ttf"
+    "revision": "99ac3308dd8ee14f749f51538d0d5b9e",
+    "url": "/fonts/ionicons.99ac3308.woff"
   },
   {
     "revision": "a2c4a261a239aa84463dc70e4bac9b9a",
     "url": "/img/ionicons.a2c4a261.svg"
   },
   {
-    "revision": "e6f5f04469bdef0995d537330296ea0f",
+    "revision": "a4409a91160e934ccc5c3f1e717a344e",
     "url": "/index.html"
   },
   {
