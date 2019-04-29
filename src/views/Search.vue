@@ -4,7 +4,7 @@
     <mu-button icon slot="left" value="history">
       <mu-icon value="arrow_back_ios"></mu-icon>
     </mu-button>
-    <center>Search</center>
+    <center>Explanation</center>
     <mu-menu slot="right">
       <mu-button icon>
         <mu-icon value="menu" :size="32"></mu-icon>
@@ -20,13 +20,21 @@
   </mu-appbar>
 
   <!-- 原题 -->
-  <img :src="foto?blobToSrc(foto.data):Img404">
+  <img :src="foto?blobToSrc(foto.data):Img404" class="TImg">
 
   <!-- 答案区 -->
   <Collapse v-if="hasFoto" simple :value="[1,2,3,4,5,6]">
     <Panel name="1">
-      Question
-      <img :src="mockQua" slot="content"/>
+      Explanation
+      <!-- <img :src="mockQua" slot="content"/> -->
+      <p slot="content">Let D = {z€C: |z|&lt;1} be the complex unit disc and let 0 &lt; a &lt; 1 real number. Suppose that f : D -&gt; C is a holomorphic function such that f(a) = 1 and f(-a) = -1.
+        (a) Prove that
+        sup |f(z)| &gt;= 1/a.
+        z € D
+        (b) Prove that if f has no root, then
+        sup |f(z)| &gt;= exp((1-a^2)*pi/4a)
+        z€D
+      </p>
     </Panel>
 
     <Panel name="2">
@@ -35,15 +43,15 @@
         <Carousel loop slot="content">
           <CarouselItem>
             <div class="demo-carousel">
-              <img :src="mockSol1">
+              <img :src="mockSol" class="CImg">
             </div>
           </CarouselItem>
-          <CarouselItem>
+          <!-- <CarouselItem>
             <div class="demo-carousel">
               <img :src="mockSol2">
             </div>
             <Rate allow-half />
-          </CarouselItem>
+          </CarouselItem> -->
         </Carousel>
 
         <Button shape="circle">Write a Solution</Button>
@@ -84,9 +92,13 @@
     <Panel name="6">
       More
       <div slot="content" class="buttonSet">
-        <Button Icon="md-arrow-back" type="info">Collection</Button>
-        <Button Icon="md-warning" type="warning">Report</Button>
-        <Button Icon="md-create" type="success">More Exercises</Button>
+        <br />
+        <Button Icon="md-arrow-back" type="info" long>Collection</Button>
+        <br />
+        <Button Icon="md-warning" type="warning" long>Report</Button>
+        <br />
+        <Button Icon="md-create" type="success" long>More Exercises</Button>
+        <br />
       </div>
     </Panel>
   </Collapse>
@@ -102,18 +114,20 @@ import {
 } from 'marked';
 
 import mockQua from '../assets/mock_qua.jpg';
-import mockSol1 from '../assets/mock_sol1.jpg'
-import mockSol2 from '../assets/mock_sol2.jpg'
+import mockSol from '../assets/mock_sol.jpg'
+// import mockSol1 from '../assets/mock_sol1.jpg'
+// import mockSol2 from '../assets/mock_sol2.jpg'
 
 export default {
   data() {
     return {
       fotoIndex: 0,
       Img404: Img404,
-      mockQua:mockQua,
-      mockSol1:mockSol1,
-      mockSol2:mockSol2,
-    }
+      mockQua: mockQua,
+      // mockSol1:mockSol1,
+      // mockSol2:mockSol2,
+      mockSol: mockSol,
+    };
   },
   mounted() {
     // this.getMedia();
@@ -136,7 +150,7 @@ export default {
     compiledMarkdown: function() {
       return marked(this.input, {
         sanitize: true
-      })
+      });
     }
   },
   computed: {
@@ -151,21 +165,25 @@ export default {
     }
   },
   components: {
-    InputTag,
+    // InputTag,
   }
 }
 </script>
 
 
 <style scoped>
-img {
+.TImg {
   object-fit: fill;
   width: 100%;
   border-radius: 8px;
   max-height: 200px;
 }
 
-#history >>> .vue-input-tag-wrapper {
+.CImg {
+  width: 100%;
+}
+
+#history>>>.vue-input-tag-wrapper {
   border: 0;
 }
 
@@ -173,15 +191,12 @@ div {
   text-align: left;
 }
 
-iframe{
+iframe {
   width: 100%;
 
 }
 
-.buttonSet{
-  text-align: right;
-}
-.buttonSet >>> buttion{
-  margin-left: 8px; 
+.buttonSet>>>buttion {
+  margin-top: 8px;
 }
 </style>

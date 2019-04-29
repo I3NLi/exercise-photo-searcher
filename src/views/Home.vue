@@ -1,15 +1,18 @@
 <template>
-<div id="home" >
+<div id="home">
   <Modal id="camera-modal" v-model="isCameraOpen" fullscreen :closable="false" :mask-closable="false">
-    <video v-show="!hasFoto" ref="video" style="width:100%;height:100%;object-fit:cover" autoplay="autoplay"></video>
+
+    <video v-show="!hasFoto" ref="video" style="width:100%;height:100%;object-fit:cover" autoplay="autoplay" playsinline></video>
     <canvas width=500 height=500 v-show="hasFoto" ref="canvas"></canvas>
+    <input v-show="false" type="file" ref="CameraInput" accept="image/*">
+
     <div slot="footer" class="container">
       <div class="row align-items-end">
         <div class="col">
-          <mu-button v-show="!hasFoto" flat>
+          <mu-button v-if="!hasFoto" flat>
             <mu-icon value="image"></mu-icon>
           </mu-button>
-          <mu-button v-show="hasFoto" flat @click="openCamera()">
+          <mu-button v-if="hasFoto" flat @click="openCamera()">
             <mu-icon value="replay"></mu-icon>
           </mu-button>
         </div>
@@ -74,9 +77,9 @@
     </div>
 
     <h5>New issues</h5>
-    <hr/>
-    <br/><br/><br/><br/>
-    <hr/>
+    <hr />
+    <br /><br /><br /><br />
+    <hr />
     <span>No More</span>
   </Card>
 </div>
@@ -88,10 +91,13 @@ import 'cropperjs/dist/cropper.css';
 
 export default {
   data() {
+    let u = navigator.userAgent;
     return {
       isCameraOpen: false,
       hasFoto: false,
       cropper: null,
+      isAndroid: u.indexOf('Android') > -1 || u.indexOf('Adr') > -1, //android终端
+      isIOS: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/)
     }
   },
   mounted() {
@@ -99,12 +105,14 @@ export default {
   },
   methods: {
     getMedia() {
+
       let constraints = {
         video: {
           width: window.innerWidth,
-          height: window.innerHeight
+          height: window.innerHeight,
+          facingMode: "environment"
         },
-        audio: true
+        audio: false
       };
       //获得video摄像头区域
       let video = this.$refs.video
@@ -118,6 +126,7 @@ export default {
         video.srcObject = MediaStream;
         video.play();
       });
+
     },
     closeCamera() {
       let video = this.$refs.video;
@@ -138,15 +147,53 @@ export default {
         this.cropper.destroy();
         this.cropper = null;
       }
-      ctx.drawImage(video, 0, 0,video.width,video.height);
+      ctx.drawImage(video, 0, 0);
       this.hasFoto = true;
       this.closeCamera();
       this.initCroppe();
     },
+    drawToCanvas(imgData) {
+      let vm=this;
+      var cvs = this.$refs.canvas;
+      var ctx = cvs.getContext('2d');
+      var img = new Image;
+      cvs.width = window.innerWidth;
+      cvs.height = window.innerHeight;
+      img.src = imgData;
+      img.onload = function() { //必须onload之后再画
+        cvs.width = img.width;
+        cvs.height = img.height;
+        ctx.drawImage(img, 0, 0);
+        vm.isCameraOpen = true;
+        vm.hasFoto = true;
+        vm.initCroppe();
+      }
+    },
     openCamera() {
-      this.isCameraOpen = true;
-      this.hasFoto = false;
-      this.getMedia();
+      if (this.isIOS) {
+        let vm=this;
+        console.log("isIOS");
+        this.$refs['CameraInput'].onchange = function() {
+          var file = this.files[0]; //获取input输入的图片
+          if (!/image\/\w+/.test(file.type)) {
+            alert("请确保文件为图像类型");
+            return false;
+          } //判断是否图片，在移动端由于浏览器对调用file类型处理不同，虽然加了accept = 'image/*'，但是还要再次判断
+          var reader = new FileReader();
+          reader.readAsDataURL(file); //转化成base64数据类型
+          reader.onload = function(e) {
+            vm.drawToCanvas(this.result);
+          }
+        }
+        this.$refs['CameraInput'].click();
+        // let uploadFile=new FormData();
+        // let imgData=this.$refs.CameraInput.files[0];
+        // uploadFile.append('file',imgData);
+      } else {
+        this.isCameraOpen = true;
+        this.hasFoto = false;
+        this.getMedia();
+      }
     },
     initCroppe() {
       let image = this.$refs.canvas;
