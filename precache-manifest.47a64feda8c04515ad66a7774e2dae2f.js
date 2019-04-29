@@ -48,7 +48,7 @@ self.__precacheManifest = [
     "url": "/img/ionicons.a2c4a261.svg"
   },
   {
-    "revision": "9af8aefdc072e73396214c5399b63a55",
+    "revision": "e6f5f04469bdef0995d537330296ea0f",
     "url": "/index.html"
   },
   {
