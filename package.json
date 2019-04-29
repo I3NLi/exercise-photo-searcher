@@ -6,7 +6,9 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "test:unit": "vue-cli-service test:unit"
+    "test:unit": "vue-cli-service test:unit",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
   },
   "dependencies": {
     "bootstrap": "^4.3.1",
@@ -14,6 +16,7 @@
     "cropperjs": "^1.5.1",
     "iview": "^3.4.1",
     "jquery": "^3.4.0",
+    "marked": "^0.6.2",
     "mint-ui": "^2.2.13",
     "muse-ui": "^3.0.2",
     "register-service-worker": "^1.6.2",
@@ -40,6 +43,7 @@
     "chai": "^4.1.2",
     "eslint": "^5.16.0",
     "eslint-plugin-vue": "^5.0.0",
+    "gh-pages": "^2.0.1",
     "sass": "^1.18.0",
     "sass-loader": "^7.1.0",
     "typescript": "^3.4.3",

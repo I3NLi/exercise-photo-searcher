@@ -101,8 +101,8 @@ export default {
     getMedia() {
       let constraints = {
         video: {
-          width: 500,
-          height: 500
+          width: window.innerWidth,
+          height: window.innerHeight
         },
         audio: true
       };
@@ -138,7 +138,7 @@ export default {
         this.cropper.destroy();
         this.cropper = null;
       }
-      ctx.drawImage(video, 0, 0);
+      ctx.drawImage(video, 0, 0,video.width,video.height);
       this.hasFoto = true;
       this.closeCamera();
       this.initCroppe();

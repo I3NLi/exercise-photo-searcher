@@ -19,77 +19,100 @@
     </mu-menu>
   </mu-appbar>
 
-  <h3 :v-if="typeof(foto)==undefined">no data</h3>
+  <!-- 原题 -->
+  <img :src="foto?blobToSrc(foto.data):Img404">
 
-  <img :v-if="foto!=undefined" :src="blobToSrc(foto.data)" style="height:300px; width=100%; border-radius: 8px;">
+  <!-- 答案区 -->
+  <Collapse v-if="hasFoto" simple :value="[1,2,3,4,5,6]">
+    <Panel name="1">
+      Question
+      <img :src="mockQua" slot="content"/>
+    </Panel>
 
-  <div :v-if="foto!=undefined" class="container">
-    <div class="row">
-      <div class="col">
-        <h3>Topic</h3>
-      </div>
-      <div class="col">
-        <Page :total="3" :page-size="1" />
-      </div>
-    </div>
+    <Panel name="2">
+      Solution
+      <div slot="content">
+        <Carousel loop slot="content">
+          <CarouselItem>
+            <div class="demo-carousel">
+              <img :src="mockSol1">
+            </div>
+          </CarouselItem>
+          <CarouselItem>
+            <div class="demo-carousel">
+              <img :src="mockSol2">
+            </div>
+            <Rate allow-half />
+          </CarouselItem>
+        </Carousel>
 
-    <div class="row">
-      <div class="col">
-        <h3>Answer</h3>
+        <Button shape="circle">Write a Solution</Button>
       </div>
-      <div class="col">
-        <Page :total="3" :page-size="1" />
-      </div>
-    </div>
+    </Panel>
 
-    <div class="row">
-      <div class="col">
-        <Button shape="circle">Write the answer</Button>
+    <Panel name="4">
+      Tutorial
+      <Carousel loop slot="content">
+        <CarouselItem>
+          <div class="demo-carousel">
+            <iframe src="https://www.youtube.com/embed/xTuMdiCZnYw" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          </div>
+          <Rate allow-half />
+        </CarouselItem>
+        <CarouselItem>
+          <div class="demo-carousel">
+            <iframe src="https://www.youtube.com/embed/sqwVvJL3WTw" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          </div>
+          <Rate allow-half />
+        </CarouselItem>
+      </Carousel>
+    </Panel>
+    <Panel name="5">
+      Discuss
+      <div slot="content">
+        <center>No data yet</center>
+        <Button shape="circle">Start Discuss</Button>
       </div>
-    </div>
-
-    <div class="row">
-      <div class="col">
-        <h3>discuss</h3>
-
+    </Panel>
+    <Panel name="6">
+      Notes
+      <div slot="content">
+        <center>No data yet</center>
+        <Button shape="circle">Add Notes</Button>
       </div>
-      <div class="col">
-        <Page :total="3" :page-size="1" />
+    </Panel>
+    <Panel name="6">
+      More
+      <div slot="content" class="buttonSet">
+        <Button Icon="md-arrow-back" type="info">Collection</Button>
+        <Button Icon="md-warning" type="warning">Report</Button>
+        <Button Icon="md-create" type="success">More Exercises</Button>
       </div>
-    </div>
+    </Panel>
+  </Collapse>
 
-    <div class="row">
-      <div class="col">
-        <Button shape="circle">Write the discuss</Button>
-
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="col">
-        <h3>notes</h3>
-      </div>
-      <div class="col">
-        <Page :total="3" :page-size="1" />
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="col">
-        <Button shape="circle">add notes</Button>
-      </div>
-    </div>
-
-  </div>
 </div>
 </template>
 
 <script>
 import InputTag from 'vue-input-tag';
+import Img404 from '../assets/404.png';
+import {
+  marked
+} from 'marked';
+
+import mockQua from '../assets/mock_qua.jpg';
+import mockSol1 from '../assets/mock_sol1.jpg'
+import mockSol2 from '../assets/mock_sol2.jpg'
+
 export default {
   data() {
     return {
-
+      fotoIndex: 0,
+      Img404: Img404,
+      mockQua:mockQua,
+      mockSol1:mockSol1,
+      mockSol2:mockSol2,
     }
   },
   mounted() {
@@ -110,13 +133,22 @@ export default {
         tags.push(0);
       }
     },
+    compiledMarkdown: function() {
+      return marked(this.input, {
+        sanitize: true
+      })
+    }
   },
   computed: {
-    foto() {
-      console.log(this.$store.getters.getFoto(null));
-      return this.$store.getters.getFoto(null);
+    hasFoto() {
+      return this.fotos.length > 0;
     },
-
+    foto() {
+      return this.fotos[this.fotoIndex];
+    },
+    fotos() {
+      return this.$store.state.fotos;
+    }
   },
   components: {
     InputTag,
@@ -127,14 +159,29 @@ export default {
 
 <style scoped>
 img {
-  object-fit: cover;
+  object-fit: fill;
+  width: 100%;
+  border-radius: 8px;
+  max-height: 200px;
 }
 
-#history>>>.vue-input-tag-wrapper {
+#history >>> .vue-input-tag-wrapper {
   border: 0;
 }
 
-div{
+div {
   text-align: left;
+}
+
+iframe{
+  width: 100%;
+
+}
+
+.buttonSet{
+  text-align: right;
+}
+.buttonSet >>> buttion{
+  margin-left: 8px; 
 }
 </style>

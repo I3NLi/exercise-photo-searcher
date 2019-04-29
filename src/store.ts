@@ -8,10 +8,10 @@ export default new Vuex.Store({
     fotos: [] as Object[],
   },
   getters: {
-    getFoto: (state) => (index) => {
-      if (index == null) { index = state.fotos.length-1; }
-      return state.fotos[index];
-    }
+    // getFoto: (state) => (index as Number) => {
+    //   if (index == null) { index = state.fotos.length-1; }
+    //   return state.fotos[index];
+    // }
   },
   mutations: {
     pushFoto(state, foto) {
