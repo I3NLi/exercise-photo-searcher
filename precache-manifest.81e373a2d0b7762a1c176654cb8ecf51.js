@@ -8,8 +8,8 @@ self.__precacheManifest = [
     "url": "/robots.txt"
   },
   {
-    "revision": "d535a25a79fb1365ae814b61e88fae71",
-    "url": "/fonts/ionicons.d535a25a.ttf"
+    "revision": "a2c4a261a239aa84463dc70e4bac9b9a",
+    "url": "/img/ionicons.a2c4a261.svg"
   },
   {
     "revision": "33540b99e788e329f69d",
@@ -32,19 +32,19 @@ self.__precacheManifest = [
     "url": "/fonts/ionicons.143146fa.woff2"
   },
   {
-    "revision": "5a24f0389316eadd4fea",
-    "url": "/js/app.c82875b9.js"
+    "revision": "75dd9334ce3dd1c8d705",
+    "url": "/js/app.a27394ce.js"
   },
   {
     "revision": "33540b99e788e329f69d",
     "url": "/js/chunk-vendors.79d30348.js"
   },
   {
-    "revision": "a2c4a261a239aa84463dc70e4bac9b9a",
-    "url": "/img/ionicons.a2c4a261.svg"
+    "revision": "d535a25a79fb1365ae814b61e88fae71",
+    "url": "/fonts/ionicons.d535a25a.ttf"
   },
   {
-    "revision": "eadc48e72e3748a541e0045532a857aa",
+    "revision": "9aec2cc17ad5da28cf2720c3f923dcd4",
     "url": "/index.html"
   },
   {
@@ -52,8 +52,8 @@ self.__precacheManifest = [
     "url": "/favicon.png"
   },
   {
-    "revision": "5a24f0389316eadd4fea",
-    "url": "/css/app.ae218982.css"
+    "revision": "75dd9334ce3dd1c8d705",
+    "url": "/css/app.d4106f89.css"
   },
   {
     "revision": "9e87eb9c027873e9f96876c7b2f5a973",
